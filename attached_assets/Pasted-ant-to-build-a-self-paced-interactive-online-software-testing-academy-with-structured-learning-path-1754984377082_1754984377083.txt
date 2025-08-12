@@ -1,0 +1,75 @@
+ant to build a self-paced, interactive online software testing academy with structured learning paths, without live video classes, but with handbook-based + practical exercises, user dashboards, payment flow, certification process, and admin control.
+Here’s how we can break this down so your website is clear, functional, and “best in class”:
+
+1. Core Features & Workflow
+Landing Page (Public)
+Hero Section: Big call-to-action button — “Start Learning Now”
+Available Learning Paths:
+90 Days – 2 hrs/day (Full course)
+60 Days Fast-track – 2 hrs/day
+Automation Only – 1 month
+Manual Testing Only
+SQL Testing Only
+JMeter Performance Testing Only
+(Each with description & “Start” button)
+How It Works: Step-by-step graphic from signup → payment → learning → certification.
+Pricing: Rs. 149 for any plan.
+Testimonials & Success Stories
+FAQ
+Learning Flow
+Select Plan →
+Sign Up (basic details: name, email, phone) →
+Send Enquiry (auto-send to you via email + stored in admin panel) →
+You Send Payment Instructions (offline UPI, bank transfer, etc.) →
+After Payment → you manually activate their Learning Dashboard.
+Dashboard Displays:
+Your Active Learning Plans (with progress tracker)
+Handbook Modules (downloadable PDFs / HTML lessons)
+Practical Assignments (with submission option)
+Progress Bar for each day’s 2-hour slot.
+Once Completed → "Submit for Certificate" button → notification to you.
+You Approve + Ask for Certificate Fee Payment
+Online Exam (MCQ + scenario-based)
+If Pass → Generate Certificate PDF with name, course, completion date, your signature.
+2. Technical Features
+User Dashboard
+Daily Lessons Unlock (auto-scheduled release — avoids skipping ahead)
+Downloadable Handbook
+Assignment Submission
+Progress Tracker
+Exam Portal
+Certificate Download after passing
+Admin Panel (For You)
+Manage users & plans
+Approve payments manually
+Upload lessons / PDFs / exercises
+View assignments & mark them
+Schedule exams
+Approve certificates
+3. Tech Stack Recommendations
+Frontend: Next.js or React (fast, SEO-friendly, modern look)
+Backend: Node.js with Express or Django (secure, scalable)
+Database: PostgreSQL or MySQL (user data, progress, payments)
+Authentication: JWT-based login
+File Handling: AWS S3 or Cloudinary (for PDFs & assignments)
+Payments: Manual entry (since offline now), can upgrade later to Razorpay
+Exam System: Custom MCQ + scenario-based module
+Certificate Generation: Node-based PDF generation with your branding
+4. Modern UI / UX
+Minimal, clean design (inspired by Coursera + Notion look)
+Mobile-first responsive
+Simple icons, readable fonts
+Progress visualization (like Duolingo streaks)
+Color palette: calming (blue, teal) for learning focus
+5. Suggested Development Phases
+Phase 1 – Core MVP
+Landing page + signup + enquiry form + dashboard skeleton
+Manual payment activation
+Course content upload & daily unlock
+Phase 2 – Certification
+Exam system
+Certificate PDF generation
+Submission notifications
+Phase 3 – Automation
+Online payment integration (Razorpay/Stripe)
+Automated certificate delivery
