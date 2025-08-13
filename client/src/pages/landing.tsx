@@ -130,7 +130,7 @@ export default function Landing() {
                 Master Software Testing with Expert Guidance
               </h1>
               <p className="text-xl mb-8 text-blue-100">
-                Self-paced, interactive learning paths designed by industry experts. 
+                Choose from self-paced courses (₹149) or premium live video sessions (₹25,000). 
                 From manual testing to automation - become job-ready in just 60-90 days.
               </p>
               <Button
@@ -221,51 +221,101 @@ export default function Landing() {
 
       {/* Pricing */}
       <section id="pricing" className="py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-slate-800 mb-4">One Price, All Courses</h2>
-          <p className="text-lg text-slate-600 mb-8">Quality education shouldn't break the bank. Choose any course for the same affordable price.</p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-800 mb-4">Choose Your Learning Format</h2>
+            <p className="text-lg text-slate-600">Quality education with flexible pricing options to match your needs</p>
+          </div>
           
-          <Card className="bg-gradient-to-r from-primary to-secondary text-white max-w-md mx-auto">
-            <CardContent className="p-8">
-              <div className="text-center">
-                <div className="text-6xl font-bold mb-2">₹149</div>
-                <p className="text-xl mb-6">For Any Course</p>
-                <ul className="space-y-3 mb-8 text-left">
-                  <li className="flex items-center">
-                    <CheckCircle className="text-accent mr-3 h-4 w-4" />
-                    Complete course access
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="text-accent mr-3 h-4 w-4" />
-                    Downloadable handbooks
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="text-accent mr-3 h-4 w-4" />
-                    Practical assignments
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="text-accent mr-3 h-4 w-4" />
-                    Progress tracking
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="text-accent mr-3 h-4 w-4" />
-                    Industry certificate
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="text-accent mr-3 h-4 w-4" />
-                    Lifetime access
-                  </li>
-                </ul>
-                <Button
-                  size="lg"
-                  onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full bg-accent hover:bg-green-600 text-white font-semibold"
-                >
-                  Enroll Now
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Regular Courses */}
+            <Card className="bg-gradient-to-r from-primary to-secondary text-white">
+              <CardContent className="p-8">
+                <div className="text-center">
+                  <Badge className="bg-accent text-white mb-4">SELF-PACED</Badge>
+                  <div className="text-5xl font-bold mb-2">₹149</div>
+                  <p className="text-xl mb-6">Any Self-Study Course</p>
+                  <ul className="space-y-3 mb-8 text-left">
+                    <li className="flex items-center">
+                      <CheckCircle className="text-accent mr-3 h-4 w-4" />
+                      Complete course access
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-accent mr-3 h-4 w-4" />
+                      Downloadable handbooks
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-accent mr-3 h-4 w-4" />
+                      Practical assignments
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-accent mr-3 h-4 w-4" />
+                      Progress tracking
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-accent mr-3 h-4 w-4" />
+                      Industry certificate
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-accent mr-3 h-4 w-4" />
+                      Lifetime access
+                    </li>
+                  </ul>
+                  <Button
+                    size="lg"
+                    onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full bg-accent hover:bg-green-600 text-white font-semibold"
+                  >
+                    Choose Self-Study
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Premium Live Course */}
+            <Card className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-2 border-yellow-400 shadow-lg">
+              <CardContent className="p-8">
+                <div className="text-center">
+                  <Badge className="bg-yellow-600 text-white mb-4">PREMIUM LIVE</Badge>
+                  <div className="text-5xl font-bold mb-2">₹25,000</div>
+                  <p className="text-xl mb-6">Live Video Call Sessions</p>
+                  <ul className="space-y-3 mb-8 text-left">
+                    <li className="flex items-center">
+                      <CheckCircle className="text-yellow-200 mr-3 h-4 w-4" />
+                      Live video call sessions
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-yellow-200 mr-3 h-4 w-4" />
+                      Direct instructor teaching
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-yellow-200 mr-3 h-4 w-4" />
+                      Personal mentorship
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-yellow-200 mr-3 h-4 w-4" />
+                      Manual + Automation both
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-yellow-200 mr-3 h-4 w-4" />
+                      Real-time doubt clearing
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="text-yellow-200 mr-3 h-4 w-4" />
+                      Job placement guarantee
+                    </li>
+                  </ul>
+                  <Button
+                    size="lg"
+                    onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold"
+                  >
+                    Book Live Sessions
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
