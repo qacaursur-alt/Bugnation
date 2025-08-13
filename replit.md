@@ -74,3 +74,33 @@ Preferred communication style: Simple, everyday language.
 - **React Hook Form**: Performant forms with minimal re-renders
 - **Zod**: Schema validation for both client and server-side validation
 - **Hookform Resolvers**: Integration between React Hook Form and Zod
+
+## Deployment & Setup
+
+### Local Development Setup
+1. **Prerequisites**: Node.js 18+, PostgreSQL, Visual Studio Code
+2. **Environment Variables**: DATABASE_URL, SESSION_SECRET, EMAIL credentials
+3. **Database Setup**: PostgreSQL database with `npm run db:push` migration
+4. **Development Server**: `npm run dev` starts both frontend and backend
+
+### VS Code Configuration
+- **Extensions**: React snippets, TypeScript support, Tailwind IntelliSense
+- **Settings**: Auto-format on save, TypeScript import preferences
+- **Debug Configuration**: Node.js debugging for server development
+
+### Production Deployment Options
+1. **Vercel**: Full-stack deployment with serverless functions
+2. **Railway**: Container-based deployment with PostgreSQL addon
+3. **Heroku**: Traditional PaaS deployment with Heroku Postgres
+4. **DigitalOcean**: App Platform with managed database
+
+### GitHub Integration
+- **Repository Structure**: Monorepo with client/server separation
+- **Build Process**: Vite for frontend, ESBuild for backend bundling
+- **CI/CD**: Automatic deployment on git push (platform-dependent)
+
+### Production Considerations
+- **Database**: Managed PostgreSQL (Neon, Railway, or cloud provider)
+- **Authentication**: Replit OAuth configuration for custom domains
+- **Email Service**: Gmail App Password or SendGrid for notifications
+- **Environment Security**: Proper secret management and HTTPS enforcement
