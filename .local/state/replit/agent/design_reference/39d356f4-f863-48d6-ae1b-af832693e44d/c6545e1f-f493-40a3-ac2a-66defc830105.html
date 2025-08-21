@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestAcademy Pro - Master Software Testing Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0066CC',
+                        secondary: '#00A6B8',
+                        accent: '#4CAF50',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="font-inter bg-slate-50 text-slate-800">
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold text-primary">TestAcademy Pro</h1>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#courses" class="text-slate-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Courses</a>
+                            <a href="#how-it-works" class="text-slate-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">How It Works</a>
+                            <a href="#pricing" class="text-slate-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Pricing</a>
+                            <a href="#testimonials" class="text-slate-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Reviews</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="text-slate-600 hover:text-primary font-medium">Sign In</button>
+                    <button class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page Content -->
+    <div id="landingPage">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-primary to-secondary text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h1 class="text-4xl lg:text-6xl font-bold mb-6">Master Software Testing with Expert Guidance</h1>
+                        <p class="text-xl mb-8 text-blue-100">Self-paced, interactive learning paths designed by industry experts. From manual testing to automation - become job-ready in just 60-90 days.</p>
+                        <button class="bg-accent hover:bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg transition-all transform hover:scale-105">
+                            Start Learning Now <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                        <div class="mt-8 flex items-center space-x-6 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-accent mr-2"></i>
+                                <span>2000+ Students</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i>
+                                <span>4.8/5 Rating</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-certificate text-accent mr-2"></i>
+                                <span>Industry Certificate</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden lg:block">
+                        <!-- Modern software testing illustration with laptops and testing icons -->
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Software testing workspace with multiple monitors showing testing interfaces" class="rounded-xl shadow-2xl" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Available Learning Paths -->
+        <section id="courses" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Choose Your Learning Path</h2>
+                    <p class="text-lg text-slate-600">Structured courses designed to take you from beginner to professional</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Full Course - 90 Days -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border-2 border-primary">
+                        <div class="bg-primary text-white px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-semibold">Complete Testing Mastery</h3>
+                                <span class="bg-accent text-white text-xs px-2 py-1 rounded-full">POPULAR</span>
+                            </div>
+                            <p class="text-blue-100 mt-2">90 Days • 2 hrs/day</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Manual Testing Fundamentals
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Automation with Selenium
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>API Testing & SQL
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Performance Testing (JMeter)
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Industry Certificate
+                                </li>
+                            </ul>
+                            <button class="w-full bg-primary hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors">
+                                Start This Path
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Fast Track - 60 Days -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="bg-secondary text-white px-6 py-4">
+                            <h3 class="text-xl font-semibold">Fast Track Program</h3>
+                            <p class="text-teal-100 mt-2">60 Days • 2 hrs/day</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Intensive Manual Testing
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Core Automation Skills
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Essential SQL & API Testing
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Job Interview Prep
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Certificate of Completion
+                                </li>
+                            </ul>
+                            <button class="w-full bg-secondary hover:bg-teal-700 text-white py-3 rounded-lg font-medium transition-colors">
+                                Start This Path
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Automation Only -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="bg-slate-700 text-white px-6 py-4">
+                            <h3 class="text-xl font-semibold">Automation Specialist</h3>
+                            <p class="text-slate-300 mt-2">30 Days • 2 hrs/day</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Selenium WebDriver
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>TestNG Framework
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Page Object Model
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>CI/CD Integration
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Automation Certificate
+                                </li>
+                            </ul>
+                            <button class="w-full bg-slate-700 hover:bg-slate-800 text-white py-3 rounded-lg font-medium transition-colors">
+                                Start This Path
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Manual Testing Only -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="bg-emerald-600 text-white px-6 py-4">
+                            <h3 class="text-xl font-semibold">Manual Testing Expert</h3>
+                            <p class="text-emerald-100 mt-2">30 Days • 2 hrs/day</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Testing Fundamentals
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Test Case Design
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Bug Reporting & JIRA
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Mobile App Testing
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Manual Testing Certificate
+                                </li>
+                            </ul>
+                            <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg font-medium transition-colors">
+                                Start This Path
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SQL Testing Only -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="bg-purple-600 text-white px-6 py-4">
+                            <h3 class="text-xl font-semibold">SQL & Database Testing</h3>
+                            <p class="text-purple-100 mt-2">20 Days • 2 hrs/day</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>SQL Fundamentals
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Database Testing Methods
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Data Integrity Validation
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Performance Testing
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>SQL Testing Certificate
+                                </li>
+                            </ul>
+                            <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium transition-colors">
+                                Start This Path
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- JMeter Performance Testing -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="bg-orange-600 text-white px-6 py-4">
+                            <h3 class="text-xl font-semibold">JMeter Performance Testing</h3>
+                            <p class="text-orange-100 mt-2">25 Days • 2 hrs/day</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>JMeter Fundamentals
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Load Testing Strategies
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Performance Analysis
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Reporting & Monitoring
+                                </li>
+                                <li class="flex items-center text-slate-600">
+                                    <i class="fas fa-check text-accent mr-3"></i>Performance Testing Certificate
+                                </li>
+                            </ul>
+                            <button class="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg font-medium transition-colors">
+                                Start This Path
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="py-16 bg-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">How It Works</h2>
+                    <p class="text-lg text-slate-600">Simple 4-step process to start your testing career</p>
+                </div>
+                
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
+                        <h3 class="text-xl font-semibold mb-2">Select Your Course</h3>
+                        <p class="text-slate-600">Choose the learning path that matches your career goals and timeline.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-secondary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
+                        <h3 class="text-xl font-semibold mb-2">Sign Up & Pay</h3>
+                        <p class="text-slate-600">Register with basic details and make payment via UPI or bank transfer.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-accent text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
+                        <h3 class="text-xl font-semibold mb-2">Start Learning</h3>
+                        <p class="text-slate-600">Access your dashboard, download handbooks, and complete daily exercises.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-slate-700 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">4</div>
+                        <h3 class="text-xl font-semibold mb-2">Get Certified</h3>
+                        <p class="text-slate-600">Complete the course, pass the exam, and receive your industry certificate.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing" class="py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">One Price, All Courses</h2>
+                <p class="text-lg text-slate-600 mb-8">Quality education shouldn't break the bank. Choose any course for the same affordable price.</p>
+                
+                <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl p-8 shadow-2xl max-w-md mx-auto">
+                    <div class="text-center">
+                        <div class="text-6xl font-bold mb-2">₹149</div>
+                        <p class="text-xl mb-6">For Any Course</p>
+                        <ul class="space-y-3 mb-8 text-left">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-accent mr-3"></i>Complete course access
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-accent mr-3"></i>Downloadable handbooks
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-accent mr-3"></i>Practical assignments
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-accent mr-3"></i>Progress tracking
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-accent mr-3"></i>Industry certificate
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-accent mr-3"></i>Lifetime access
+                            </li>
+                        </ul>
+                        <button class="w-full bg-accent hover:bg-green-600 text-white py-4 rounded-lg text-lg font-semibold transition-colors">
+                            Enroll Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="py-16 bg-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Success Stories</h2>
+                    <p class="text-lg text-slate-600">Join thousands of students who've transformed their careers</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <!-- Profile image of a professional woman smiling -->
+                            <img src="https://pixabay.com/get/g58ac1a47b31cbe2917c86a637e2a3c5f0797c6d595ad9f69e65b4a516efe2efc343a681205902c86aa79ce2dad780d0f596ccba16b10c987b1250c872114deae_1280.jpg" alt="Professional woman with confident smile" class="w-12 h-12 rounded-full object-cover mr-4" />
+                            <div>
+                                <h4 class="font-semibold">Priya Sharma</h4>
+                                <p class="text-slate-600 text-sm">Junior QA Engineer at TCS</p>
+                            </div>
+                        </div>
+                        <div class="text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-700">"The structured approach and practical exercises made learning easy. Got my first testing job within 2 months of completion!"</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <!-- Profile image of a young professional man -->
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150" alt="Young professional man in business attire" class="w-12 h-12 rounded-full object-cover mr-4" />
+                            <div>
+                                <h4 class="font-semibold">Rahul Kumar</h4>
+                                <p class="text-slate-600 text-sm">Automation Tester at Infosys</p>
+                            </div>
+                        </div>
+                        <div class="text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-700">"Excellent content quality and the self-paced format worked perfectly with my schedule. Highly recommend the automation course!"</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <!-- Profile image of a professional woman with glasses -->
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150" alt="Professional woman wearing glasses with warm smile" class="w-12 h-12 rounded-full object-cover mr-4" />
+                            <div>
+                                <h4 class="font-semibold">Sneha Patel</h4>
+                                <p class="text-slate-600 text-sm">Senior QA Lead at Wipro</p>
+                            </div>
+                        </div>
+                        <div class="text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-700">"Great value for money! The course material is comprehensive and the certificate helped me get a promotion."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Frequently Asked Questions</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">Is this suitable for complete beginners?</h3>
+                        <p class="text-slate-600">Absolutely! Our courses are designed to take you from zero to job-ready, with no prior testing experience required.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">How do I access the course materials?</h3>
+                        <p class="text-slate-600">After enrollment and payment confirmation, you'll get access to your personal dashboard where you can download handbooks and access all course materials.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">What payment methods do you accept?</h3>
+                        <p class="text-slate-600">Currently we accept UPI payments and bank transfers. After enrollment, you'll receive detailed payment instructions.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">Will I get a certificate?</h3>
+                        <p class="text-slate-600">Yes! Upon completing your course and passing the final exam, you'll receive an industry-recognized certificate that you can add to your resume and LinkedIn profile.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">Can I learn at my own pace?</h3>
+                        <p class="text-slate-600">Yes, our courses are completely self-paced. While we recommend 2 hours per day, you can adjust the schedule based on your availability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Student Dashboard (Hidden initially) -->
+    <div id="studentDashboard" class="hidden">
+        <!-- Dashboard Header -->
+        <div class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <h1 class="text-xl font-bold text-primary">TestAcademy Pro</h1>
+                        <div class="ml-10">
+                            <span class="text-slate-600">Welcome back,</span>
+                            <span class="font-semibold" data-bind="user.name">Priya Sharma</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-slate-600 hover:text-primary">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="flex items-center space-x-2">
+                            <!-- User profile image -->
+                            <img src="https://pixabay.com/get/g0b09a10abb513a053f46d579be44a01e86b220a7a1b684f19f54c8270916d58508d3083495a7b0642bde9017169bc37e5d804fc68eabdb6dbc80a559d26757ad_1280.jpg" alt="User profile picture" class="w-8 h-8 rounded-full object-cover" />
+                            <button id="logoutBtn" class="text-slate-600 hover:text-primary">Sign Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Main Content Area -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Current Course Progress -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-slate-800">Complete Testing Mastery</h2>
+                            <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">Day 23 of 90</span>
+                        </div>
+                        
+                        <!-- Overall Progress -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-slate-600">Overall Progress</span>
+                                <span class="font-semibold text-primary" data-bind="course.progress">26%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-3">
+                                <div class="bg-gradient-to-r from-primary to-secondary h-3 rounded-full" style="width: 26%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Today's Lesson -->
+                        <div class="bg-slate-50 rounded-lg p-4 mb-6">
+                            <h3 class="text-lg font-semibold mb-2">Today's Focus</h3>
+                            <p class="text-slate-600 mb-3">Test Case Design Techniques - Boundary Value Analysis</p>
+                            <div class="flex space-x-3">
+                                <button class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                                    <i class="fas fa-play mr-2"></i>Continue Learning
+                                </button>
+                                <button class="border border-slate-300 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium">
+                                    <i class="fas fa-download mr-2"></i>Download Handbook
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Week Progress -->
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">This Week's Progress</h3>
+                            <div class="grid grid-cols-7 gap-2">
+                                <div class="text-center">
+                                    <div class="text-xs text-slate-500 mb-1">Mon</div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white text-xs font-medium">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xs text-slate-500 mb-1">Tue</div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white text-xs font-medium">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xs text-slate-500 mb-1">Wed</div>
+                                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs font-medium">23</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xs text-slate-500 mb-1">Thu</div>
+                                    <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-slate-400 text-xs">24</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xs text-slate-500 mb-1">Fri</div>
+                                    <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-slate-400 text-xs">25</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xs text-slate-500 mb-1">Sat</div>
+                                    <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-slate-400 text-xs">26</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xs text-slate-500 mb-1">Sun</div>
+                                    <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-slate-400 text-xs">27</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Modules -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-bold text-slate-800 mb-6">Course Modules</h2>
+                        <div class="space-y-4">
+                            <!-- @MAP: modules.map(module => ( -->
+                            <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white text-sm">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold text-slate-800">Module 1: Testing Fundamentals</h3>
+                                            <p class="text-slate-600 text-sm">Introduction to Software Testing • 7 lessons</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-accent font-medium text-sm">Completed</span>
+                                </div>
+                            </div>
+                            
+                            <div class="border-2 border-primary rounded-lg p-4 bg-blue-50">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-medium">2</div>
+                                        <div>
+                                            <h3 class="font-semibold text-slate-800">Module 2: Test Case Design</h3>
+                                            <p class="text-slate-600 text-sm">Design Techniques & Best Practices • 8 lessons</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-primary font-medium text-sm">Current</span>
+                                </div>
+                                <div class="mt-3 ml-12">
+                                    <div class="w-full bg-slate-200 rounded-full h-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1">5 of 8 lessons completed</p>
+                                </div>
+                            </div>
+                            
+                            <div class="border rounded-lg p-4 opacity-60">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-8 h-8 bg-slate-300 rounded-full flex items-center justify-center text-slate-500 text-sm font-medium">3</div>
+                                        <div>
+                                            <h3 class="font-semibold text-slate-500">Module 3: Automation Basics</h3>
+                                            <p class="text-slate-500 text-sm">Introduction to Selenium • 10 lessons</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-slate-500 text-sm">
+                                        <i class="fas fa-lock mr-1"></i>Locked
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+                    </div>
+
+                    <!-- Assignments -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-xl font-bold text-slate-800">Assignments</h2>
+                            <button class="text-primary hover:text-blue-700 text-sm font-medium">View All</button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="border rounded-lg p-4 bg-yellow-50 border-yellow-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="font-semibold text-slate-800">Test Case Design Exercise</h3>
+                                    <span class="bg-warning text-white px-2 py-1 rounded-full text-xs">Due Tomorrow</span>
+                                </div>
+                                <p class="text-slate-600 text-sm mb-3">Create test cases for the login functionality using boundary value analysis</p>
+                                <div class="flex space-x-3">
+                                    <button class="bg-primary hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">
+                                        Submit Assignment
+                                    </button>
+                                    <button class="text-slate-600 hover:text-slate-800 px-3 py-1 text-sm">
+                                        <i class="fas fa-download mr-1"></i>Download Template
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="border rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="font-semibold text-slate-800">Bug Report Practice</h3>
+                                    <span class="bg-accent text-white px-2 py-1 rounded-full text-xs">
+                                        <i class="fas fa-check mr-1"></i>Submitted
+                                    </span>
+                                </div>
+                                <p class="text-slate-600 text-sm mb-2">Write detailed bug reports for the provided scenarios</p>
+                                <p class="text-green-600 text-sm font-medium">Grade: 95/100 - Excellent work!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <!-- Learning Stats -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Learning Stats</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-600">Study Streak</span>
+                                <span class="font-bold text-accent">7 days</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-600">Hours Completed</span>
+                                <span class="font-bold text-primary">46h</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-600">Assignments Done</span>
+                                <span class="font-bold text-secondary">12/20</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-600">Course Progress</span>
+                                <span class="font-bold text-slate-800">26%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button class="w-full flex items-center px-4 py-3 bg-slate-50 hover:bg-slate-100 rounded-lg text-left transition-colors">
+                                <i class="fas fa-download text-primary mr-3"></i>
+                                <span class="text-slate-700">Download Today's Material</span>
+                            </button>
+                            <button class="w-full flex items-center px-4 py-3 bg-slate-50 hover:bg-slate-100 rounded-lg text-left transition-colors">
+                                <i class="fas fa-upload text-secondary mr-3"></i>
+                                <span class="text-slate-700">Submit Assignment</span>
+                            </button>
+                            <button class="w-full flex items-center px-4 py-3 bg-slate-50 hover:bg-slate-100 rounded-lg text-left transition-colors">
+                                <i class="fas fa-calendar text-accent mr-3"></i>
+                                <span class="text-slate-700">View Schedule</span>
+                            </button>
+                            <button class="w-full flex items-center px-4 py-3 bg-slate-50 hover:bg-slate-100 rounded-lg text-left transition-colors">
+                                <i class="fas fa-certificate text-warning mr-3"></i>
+                                <span class="text-slate-700">Check Certification</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Deadlines -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Upcoming Deadlines</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-warning rounded-full"></div>
+                                <div>
+                                    <p class="text-sm font-medium text-slate-800">Test Case Assignment</p>
+                                    <p class="text-xs text-slate-500">Due tomorrow</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-error rounded-full"></div>
+                                <div>
+                                    <p class="text-sm font-medium text-slate-800">Module 2 Quiz</p>
+                                    <p class="text-xs text-slate-500">Due in 3 days</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                <div>
+                                    <p class="text-sm font-medium text-slate-800">Automation Project</p>
+                                    <p class="text-xs text-slate-500">Due next week</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">TestAcademy Pro</h3>
+                    <p class="text-slate-300 mb-4">Empowering the next generation of software testing professionals with practical, industry-focused education.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="#courses" class="hover:text-white">All Courses</a></li>
+                        <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Student Support</a></li>
+                        <li><a href="#" class="hover:text-white">Technical Issues</a></li>
+                        <li><a href="#" class="hover:text-white">Payment Help</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-slate-300">
+                        <p><i class="fas fa-envelope mr-2"></i>support@testacademypro.com</p>
+                        <p><i class="fas fa-phone mr-2"></i>+91 98765 43210</p>
+                        <p><i class="fas fa-clock mr-2"></i>Mon-Fri: 9AM-6PM IST</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-8 border-slate-700">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-400 text-sm">© 2024 TestAcademy Pro. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm text-slate-400 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                    <a href="#" class="hover:text-white">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Start Your Learning Journey</h2>
+                <button id="closeModal" class="text-slate-400 hover:text-slate-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                    <input type="text" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your full name" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                    <input type="email" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your email" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+                    <input type="tel" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Select Course</label>
+                    <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        <option value="">Choose your course</option>
+                        <option value="complete">Complete Testing Mastery (90 Days)</option>
+                        <option value="fasttrack">Fast Track Program (60 Days)</option>
+                        <option value="automation">Automation Specialist (30 Days)</option>
+                        <option value="manual">Manual Testing Expert (30 Days)</option>
+                        <option value="sql">SQL & Database Testing (20 Days)</option>
+                        <option value="jmeter">JMeter Performance Testing (25 Days)</option>
+                    </select>
+                </div>
+                
+                <div class="bg-slate-50 p-4 rounded-lg">
+                    <p class="text-sm text-slate-600 mb-2">Next Steps:</p>
+                    <ol class="text-sm text-slate-600 space-y-1">
+                        <li>1. Submit this form to send us your enquiry</li>
+                        <li>2. We'll email you payment instructions within 24 hours</li>
+                        <li>3. Complete payment via UPI or bank transfer</li>
+                        <li>4. Get instant access to your learning dashboard</li>
+                    </ol>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                    Send Enquiry & Get Payment Details
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // TODO: Implement proper authentication, course enrollment, and dashboard functionality
+        
+        (function() {
+            // Simple page state management
+            const landingPage = document.getElementById('landingPage');
+            const studentDashboard = document.getElementById('studentDashboard');
+            const registrationModal = document.getElementById('registrationModal');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const closeModal = document.getElementById('closeModal');
+            
+            let isLoggedIn = false;
+            
+            // Show registration modal on course selection
+            const courseButtons = document.querySelectorAll('button:contains("Start This Path"), .bg-accent, .bg-primary, .bg-secondary');
+            courseButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!isLoggedIn) {
+                        registrationModal.classList.remove('hidden');
+                        registrationModal.classList.add('flex');
+                    }
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                registrationModal.classList.add('hidden');
+                registrationModal.classList.remove('flex');
+            });
+            
+            // Login/logout functionality
+            loginBtn.addEventListener('click', function() {
+                // Simulate login - in real app, this would be proper authentication
+                isLoggedIn = true;
+                landingPage.classList.add('hidden');
+                studentDashboard.classList.remove('hidden');
+            });
+            
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    isLoggedIn = false;
+                    studentDashboard.classList.add('hidden');
+                    landingPage.classList.remove('hidden');
+                });
+            }
+            
+            // Handle form submission
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement form submission logic
+                    alert('Enquiry submitted! You will receive payment instructions via email within 24 hours.');
+                    registrationModal.classList.add('hidden');
+                    registrationModal.classList.remove('flex');
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
