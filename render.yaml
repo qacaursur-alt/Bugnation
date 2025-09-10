@@ -22,3 +22,5 @@ services:
         generateValue: true
       - key: CORS_ORIGIN
         value: https://bugnation.onrender.com
+      - key: PORT
+        value: 10000
