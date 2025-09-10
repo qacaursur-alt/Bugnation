@@ -3,11 +3,10 @@
   "builds": [
     {
       "src": "server/index.ts",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "client/index.html",
-      "use": "@vercel/static"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["client/**", "shared/**", "uploads/**"]
+      }
     }
   ],
   "routes": [
@@ -17,10 +16,15 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/$1"
+      "dest": "/client/index.html"
     }
   ],
   "env": {
     "NODE_ENV": "production"
+  },
+  "functions": {
+    "server/index.ts": {
+      "maxDuration": 30
+    }
   }
 }
