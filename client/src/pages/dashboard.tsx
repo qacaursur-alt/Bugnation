@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ProgressTracker } from "@/components/progress-tracker";
+import { LiveSessionsCalendar } from "@/components/live-sessions-calendar";
+import { VideoPlayer } from "@/components/video-player";
+import { PDFViewer } from "@/components/pdf-viewer";
+import { StudyPath } from "@/components/study-path";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import VideoSession from "@/components/video-session";
+import MaterialButton from "@/components/ui/material-button";
+import LogoPreloader from "@/components/logo-preloader";
+import StudentDashboard from "@/components/student-dashboard";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import {
   Bell,
@@ -18,11 +28,17 @@ import {
   Clock,
   Play,
   Lock,
+  FileText,
+  Link as LinkIcon,
+  Video,
+  ExternalLink,
 } from "lucide-react";
 
 export default function Dashboard() {
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const { user, isAuthenticated, isLoading } = useAuth();
+  const [isVideoSessionOpen, setIsVideoSessionOpen] = useState(false);
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -33,7 +49,7 @@ export default function Dashboard() {
         variant: "destructive",
       });
       setTimeout(() => {
-        window.location.href = "/api/login";
+        setLocation("/signin");
       }, 500);
       return;
     }
@@ -45,16 +61,40 @@ export default function Dashboard() {
     retry: false,
   });
 
-  const { data: certificates = [] } = useQuery<any[]>({
-    queryKey: ["/api/my-certificates"],
+  const { data: userGroups = [], isLoading: userGroupsLoading } = useQuery<any[]>({
+    queryKey: ["/api/me/groups"],
     enabled: !!user,
     retry: false,
   });
 
-  if (isLoading || enrollmentsLoading) {
+  // Separate groups by status
+  const pendingGroups = userGroups.filter((group: any) => group.status === 'pending');
+  const approvedGroups = userGroups.filter((group: any) => group.status === 'approved');
+  const activeGroups = userGroups.filter((group: any) => group.status === 'active');
+
+  const activeGroupId = activeGroups[0]?.groupId as string | undefined;
+
+  const { data: groupLearning = { paths: [], documents: {} } } = useQuery<any>({
+    queryKey: ["/api/me/groups", activeGroupId, "learning"],
+    queryFn: async () => {
+      if (!activeGroupId) return { paths: [], documents: {} };
+      const res = await fetch(`/api/me/groups/${activeGroupId}/learning`, { credentials: "include" });
+      if (!res.ok) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Failed to fetch learning content:', res.status, res.statusText);
+        }
+        return { paths: [], documents: {} };
+      }
+      return res.json();
+    },
+    enabled: !!activeGroupId,
+    retry: false,
+  });
+
+  if (isLoading || enrollmentsLoading || userGroupsLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <LogoPreloader size="lg" />
       </div>
     );
   }
@@ -68,31 +108,68 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-primary">TestAcademy Pro</h1>
-              <div className="ml-10">
-                <span className="text-slate-600">Welcome back,</span>
-                <span className="font-semibold ml-1">
+              <a href="/" className="flex items-center">
+                <img 
+                  src="/attached_assets/New Project (4).png" 
+                  alt="Debug Nation Logo" 
+                  className="h-6 sm:h-8 w-auto brightness-0"
+                />
+              </a>
+              <div className="hidden md:block ml-4 sm:ml-10">
+                <div className="flex items-center space-x-3 lg:space-x-6">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setLocation('/')}
+                    className="text-slate-600 hover:text-primary text-xs sm:text-sm"
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setLocation('/course-groups')}
+                    className="text-slate-600 hover:text-primary text-xs sm:text-sm"
+                  >
+                    Browse Courses
+                  </Button>
+                  {(user as any)?.role === 'admin' && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setLocation('/admin')}
+                      className="text-slate-600 hover:text-primary text-xs sm:text-sm"
+                    >
+                      Admin
+                    </Button>
+                  )}
+                </div>
+              </div>
+              <div className="hidden lg:block ml-4 sm:ml-10">
+                <span className="text-slate-600 text-sm">Welcome back,</span>
+                <span className="font-semibold ml-1 text-sm">
                   {(user as any)?.firstName} {(user as any)?.lastName}
                 </span>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <Button variant="ghost" size="sm" className="hidden sm:flex">
                 <Bell className="h-4 w-4" />
               </Button>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 sm:space-x-2">
                 <img
                   src={(user as any)?.profileImageUrl || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face"}
                   alt="Profile"
-                  className="w-8 h-8 rounded-full object-cover"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover"
                 />
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => window.location.href = '/api/logout'}
-                  className="text-slate-600 hover:text-primary"
+                  onClick={async () => { await fetch('/api/auth/signout', { method: 'POST' }); setLocation('/'); }}
+                  className="text-slate-600 hover:text-primary text-xs sm:text-sm"
                 >
-                  Sign Out
+                  <span className="hidden sm:inline">Sign Out</span>
+                  <span className="sm:hidden">Out</span>
                 </Button>
               </div>
             </div>
@@ -101,277 +178,16 @@ export default function Dashboard() {
       </div>
 
       {/* Dashboard Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {enrollments.length === 0 ? (
-          <Card className="text-center py-12">
-            <CardContent>
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">No Active Enrollments</h2>
-              <p className="text-slate-600 mb-6">
-                You haven't enrolled in any courses yet. Browse our available courses to get started.
-              </p>
-              <Button
-                onClick={() => window.location.href = '/api/logout'}
-                className="bg-primary hover:bg-blue-700 text-white"
-              >
-                Browse Courses
-              </Button>
-            </CardContent>
-          </Card>
-        ) : (
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Content Area */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Current Course Progress */}
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-2xl font-bold text-slate-800">
-                      {currentEnrollment?.course.title}
-                    </CardTitle>
-                    <Badge variant="secondary">
-                      Day {currentEnrollment?.currentDay} of {currentEnrollment?.course.duration}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {/* Overall Progress */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-slate-600">Overall Progress</span>
-                      <span className="font-semibold text-primary">
-                        {currentEnrollment?.progress || 0}%
-                      </span>
-                    </div>
-                    <Progress value={currentEnrollment?.progress || 0} className="h-3" />
-                  </div>
-
-                  {/* Today's Lesson */}
-                  <div className="bg-slate-50 rounded-lg p-4">
-                    <h3 className="text-lg font-semibold mb-2">Today's Focus</h3>
-                    <p className="text-slate-600 mb-3">
-                      Test Case Design Techniques - Boundary Value Analysis
-                    </p>
-                    <div className="flex space-x-3">
-                      <Button className="bg-primary hover:bg-blue-700 text-white">
-                        <Play className="mr-2 h-4 w-4" />
-                        Continue Learning
-                      </Button>
-                      <Button variant="outline">
-                        <Download className="mr-2 h-4 w-4" />
-                        Download Handbook
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* Weekly Progress */}
-                  <ProgressTracker currentDay={currentEnrollment?.currentDay || 1} />
-                </CardContent>
-              </Card>
-
-              {/* Learning Modules */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Course Modules</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white text-sm">
-                          <CheckCircle className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <h3 className="font-semibold text-slate-800">Module 1: Testing Fundamentals</h3>
-                          <p className="text-slate-600 text-sm">Introduction to Software Testing • 7 lessons</p>
-                        </div>
-                      </div>
-                      <Badge variant="outline" className="text-accent border-accent">
-                        Completed
-                      </Badge>
-                    </div>
-                  </div>
-                  
-                  <div className="border-2 border-primary rounded-lg p-4 bg-blue-50">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-medium">2</div>
-                        <div>
-                          <h3 className="font-semibold text-slate-800">Module 2: Test Case Design</h3>
-                          <p className="text-slate-600 text-sm">Design Techniques & Best Practices • 8 lessons</p>
-                        </div>
-                      </div>
-                      <Badge className="bg-primary text-white">
-                        Current
-                      </Badge>
-                    </div>
-                    <div className="mt-3 ml-12">
-                      <Progress value={60} className="h-2" />
-                      <p className="text-xs text-slate-500 mt-1">5 of 8 lessons completed</p>
-                    </div>
-                  </div>
-                  
-                  <div className="border rounded-lg p-4 opacity-60">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-8 h-8 bg-slate-300 rounded-full flex items-center justify-center text-slate-500 text-sm font-medium">3</div>
-                        <div>
-                          <h3 className="font-semibold text-slate-500">Module 3: Automation Basics</h3>
-                          <p className="text-slate-500 text-sm">Introduction to Selenium • 10 lessons</p>
-                        </div>
-                      </div>
-                      <Badge variant="secondary" className="text-slate-500">
-                        <Lock className="mr-1 h-3 w-3" />
-                        Locked
-                      </Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Assignments */}
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle>Assignments</CardTitle>
-                    <Button variant="ghost" size="sm">View All</Button>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="border rounded-lg p-4 bg-yellow-50 border-yellow-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-slate-800">Test Case Design Exercise</h3>
-                      <Badge variant="outline" className="bg-warning text-white border-warning">
-                        Due Tomorrow
-                      </Badge>
-                    </div>
-                    <p className="text-slate-600 text-sm mb-3">
-                      Create test cases for the login functionality using boundary value analysis
-                    </p>
-                    <div className="flex space-x-3">
-                      <Button size="sm" className="bg-primary hover:bg-blue-700 text-white">
-                        Submit Assignment
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Download className="mr-1 h-3 w-3" />
-                        Download Template
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="border rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-slate-800">Bug Report Practice</h3>
-                      <Badge className="bg-accent text-white">
-                        <CheckCircle className="mr-1 h-3 w-3" />
-                        Submitted
-                      </Badge>
-                    </div>
-                    <p className="text-slate-600 text-sm mb-2">
-                      Write detailed bug reports for the provided scenarios
-                    </p>
-                    <p className="text-green-600 text-sm font-medium">Grade: 95/100 - Excellent work!</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-6">
-              {/* Learning Stats */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Learning Stats</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-600">Study Streak</span>
-                    <span className="font-bold text-accent">7 days</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-600">Hours Completed</span>
-                    <span className="font-bold text-primary">46h</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-600">Assignments Done</span>
-                    <span className="font-bold text-secondary">12/20</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-600">Course Progress</span>
-                    <span className="font-bold text-slate-800">{currentEnrollment?.progress || 0}%</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Quick Actions */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Actions</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start bg-slate-50 hover:bg-slate-100"
-                  >
-                    <Download className="text-primary mr-3 h-4 w-4" />
-                    Download Today's Material
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start bg-slate-50 hover:bg-slate-100"
-                  >
-                    <Upload className="text-secondary mr-3 h-4 w-4" />
-                    Submit Assignment
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start bg-slate-50 hover:bg-slate-100"
-                  >
-                    <Calendar className="text-accent mr-3 h-4 w-4" />
-                    View Schedule
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start bg-slate-50 hover:bg-slate-100"
-                  >
-                    <Tag className="text-warning mr-3 h-4 w-4" />
-                    Check Certification
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Upcoming Deadlines */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Upcoming Deadlines</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-warning rounded-full"></div>
-                    <div>
-                      <p className="text-sm font-medium text-slate-800">Test Case Assignment</p>
-                      <p className="text-xs text-slate-500">Due tomorrow</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-error rounded-full"></div>
-                    <div>
-                      <p className="text-sm font-medium text-slate-800">Module 2 Quiz</p>
-                      <p className="text-xs text-slate-500">Due in 3 days</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-accent rounded-full"></div>
-                    <div>
-                      <p className="text-sm font-medium text-slate-800">Automation Project</p>
-                      <p className="text-xs text-slate-500">Due next week</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        )}
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
+        <StudentDashboard />
       </div>
+      
+      {/* Video Session Modal */}
+      <VideoSession
+        isOpen={isVideoSessionOpen}
+        onClose={() => setIsVideoSessionOpen(false)}
+        sessionTitle="Live Learning Session"
+      />
     </div>
   );
 }

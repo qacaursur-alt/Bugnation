@@ -1,10 +1,69 @@
+import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { db } from './db-local'; // Updated import
+import session from "express-session";
+import connectPg from "connect-pg-simple";
+import { pool } from './db-local';
+import { startNotificationService } from './notificationService';
+
+// Extend Express Request type to include session
+declare module 'express-session' {
+  interface SessionData {
+    userId?: string;
+    userRole?: string;
+  }
+}
 
 const app = express();
+
+// Add CORS support for development
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5000');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
+// Session middleware
+const PgSession = connectPg(session);
+app.use(session({
+  store: new PgSession({
+    pool: pool,
+    tableName: 'sessions'
+  }),
+  secret: process.env.SESSION_SECRET || 'testacademy-local-dev-secret-key-2024',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set to true in production with HTTPS
+    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+  }
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Serve static files from attached_assets
+app.use('/attached_assets', express.static('attached_assets'));
+
+// Serve uploaded files
+app.use('/uploads', express.static('uploads'));
+
+// Fix double slash URLs
+app.use((req, res, next) => {
+  if (req.url.includes('//')) {
+    req.url = req.url.replace(/\/+/g, '/');
+  }
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -61,11 +120,10 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
+  server.listen(port, () => {
     log(`serving on port ${port}`);
+    
+    // Start notification service
+    startNotificationService();
   });
 })();

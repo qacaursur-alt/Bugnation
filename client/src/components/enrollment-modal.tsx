@@ -75,19 +75,9 @@ export function EnrollmentModal({ course, isOpen, onClose }: EnrollmentModalProp
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md mx-4">
         <DialogHeader>
-          <div className="flex justify-between items-center">
-            <DialogTitle className="text-2xl font-bold text-slate-800">
-              Start Your Learning Journey
-            </DialogTitle>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-              className="text-slate-400 hover:text-slate-600"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
+          <DialogTitle className="text-2xl font-bold text-slate-800">
+            Start Your Learning Journey
+          </DialogTitle>
         </DialogHeader>
         
         <Form {...form}>

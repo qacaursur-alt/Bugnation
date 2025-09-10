@@ -3,10 +3,11 @@
   "builds": [
     {
       "src": "server/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["shared/**", "server/**"]
-      }
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/index.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -16,19 +17,10 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/$1"
+      "dest": "/client/$1"
     }
   ],
-  "outputDirectory": "client/dist",
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
   "env": {
-    "DATABASE_URL": "@database_url",
-    "SESSION_SECRET": "@session_secret",
-    "REPL_ID": "@repl_id",
-    "REPLIT_DOMAINS": "@replit_domains",
-    "EMAIL_USER": "@email_user",
-    "EMAIL_PASS": "@email_pass"
+    "NODE_ENV": "production"
   }
 }

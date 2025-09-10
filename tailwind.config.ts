@@ -64,6 +64,12 @@ export default {
         warning: "var(--warning)",
         error: "var(--error)",
         success: "var(--success)",
+        // ERUDO specific colors
+        erudo: {
+          green: "#018763",
+          blue: "#5897fb",
+          "dark-blue": "#3875d7",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

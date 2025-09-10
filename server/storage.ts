@@ -29,12 +29,14 @@ import {
   type ExamAttempt,
   type Certificate,
 } from "@shared/schema";
-import { db } from "./db";
+import { db } from "./db-local";
 import { eq, and, desc, asc } from "drizzle-orm";
 
 export interface IStorage {
   // User operations (mandatory for Replit Auth)
   getUser(id: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  createUser(userData: { email: string; password: string; firstName: string; lastName: string; role: string }): Promise<User>;
   upsertUser(user: UpsertUser): Promise<User>;
   
   // Course operations
@@ -84,6 +86,19 @@ export class DatabaseStorage implements IStorage {
   // User operations (mandatory for Replit Auth)
   async getUser(id: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
+  }
+
+  async createUser(userData: { email: string; password: string; firstName: string; lastName: string; role: string }): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(userData)
+      .returning();
     return user;
   }
 
@@ -216,10 +231,10 @@ export class DatabaseStorage implements IStorage {
         moduleId: lessons.moduleId,
         title: lessons.title,
         content: lessons.content,
+        description: lessons.description,
         dayNumber: lessons.dayNumber,
         orderIndex: lessons.orderIndex,
-        handbookUrl: lessons.handbookUrl,
-        videoUrl: lessons.videoUrl,
+        estimatedDuration: lessons.estimatedDuration,
         isActive: lessons.isActive,
         createdAt: lessons.createdAt,
         updatedAt: lessons.updatedAt,

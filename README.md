@@ -1,60 +1,48 @@
-# TestAcademy Pro 🎓
+# TestCademy - Online Software Testing Academy
 
-A comprehensive self-paced interactive online software testing academy with structured learning paths, manual payment processing, and certification system.
+A comprehensive online learning platform for software testing, featuring self-paced courses, live sessions, and interactive learning materials.
 
 ## 🚀 Features
 
-- **7 Course Options**: Complete Testing (90 days), Fast-track (60 days), Automation, Manual, SQL, JMeter, and Premium Live Sessions
-- **Two Learning Formats**: Self-study courses (₹149) and Premium live video sessions (₹25,000)
-- **Authentication**: Secure login with Replit OAuth
-- **Manual Payment Processing**: Enquiry-based enrollment with admin approval
-- **Progress Tracking**: Interactive dashboard with module completion tracking
-- **Admin Panel**: Comprehensive enquiry management and student activation
-- **Email Notifications**: Automated enquiry alerts and course communications
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- **Self-Paced Learning**: Structured modules with progress tracking
+- **Live Sessions**: Interactive video sessions with instructors
+- **Progress Tracking**: Real-time progress monitoring for students
+- **Admin Dashboard**: Complete course and content management
+- **Student Dashboard**: Personalized learning experience
+- **Quiz System**: Interactive assessments and quizzes
+- **Certificate Generation**: Automated certificate creation
+- **File Management**: Support for PDFs, videos, and documents
+- **Responsive Design**: Mobile-friendly interface
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18, TypeScript, Tailwind CSS, shadcn/ui
-- **Backend**: Node.js, Express.js, TypeScript
-- **Database**: PostgreSQL with Drizzle ORM
-- **Authentication**: Replit OAuth with session management
-- **Email**: Nodemailer for notifications
-- **Build Tools**: Vite, ESBuild
+### Frontend
+- **React 18** with TypeScript
+- **Vite** for build tooling
+- **Tailwind CSS** for styling
+- **Radix UI** for components
+- **React Query** for data fetching
+- **Wouter** for routing
 
-## 📁 Project Structure
+### Backend
+- **Node.js** with Express
+- **TypeScript** for type safety
+- **Drizzle ORM** for database operations
+- **PostgreSQL** (Supabase/Neon)
+- **Session-based authentication**
+- **File upload handling**
 
-```
-testacademy-pro/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── pages/         # Application pages
-│   │   ├── hooks/         # Custom React hooks
-│   │   └── lib/           # Utility functions
-├── server/                # Express backend
-│   ├── index.ts          # Server entry point
-│   ├── routes.ts         # API routes
-│   ├── storage.ts        # Database operations
-│   └── replitAuth.ts     # Authentication setup
-├── shared/               # Shared types and schemas
-│   └── schema.ts        # Database schema
-└── SETUP.md             # Detailed setup guide
-```
+### Database
+- **PostgreSQL** with Drizzle ORM
+- **Supabase** (recommended) or Neon
+- **Comprehensive schema** for courses, users, progress, etc.
 
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 18+
-- PostgreSQL database
-- Visual Studio Code (recommended)
-
-### Installation
+## 📦 Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/testacademy-pro.git
-   cd testacademy-pro
+   git clone https://github.com/yourusername/testcademy.git
+   cd testcademy
    ```
 
 2. **Install dependencies**
@@ -64,92 +52,145 @@ testacademy-pro/
 
 3. **Set up environment variables**
    ```bash
-   cp .env.example .env
-   # Edit .env with your database and email credentials
+   cp env.example .env
+   ```
+   
+   Fill in your environment variables:
+   ```env
+   # Database Configuration
+   DATABASE_URL=your_database_url
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   
+   # Server Configuration
+   PORT=5000
+   NODE_ENV=development
+   SESSION_SECRET=your_session_secret
    ```
 
-4. **Initialize database**
+4. **Set up the database**
+   - Create a Supabase project at [supabase.com](https://supabase.com)
+   - Run the database migrations:
    ```bash
    npm run db:push
    ```
 
-5. **Start development server**
+5. **Start the development server**
    ```bash
    npm run dev
    ```
 
-Visit `http://localhost:5000` to see the application.
+## 🗄️ Database Setup
 
-## 📚 Detailed Setup
+### Using Supabase (Recommended)
 
-For comprehensive setup instructions including VS Code configuration, deployment options, and troubleshooting, see [SETUP.md](./SETUP.md).
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Go to Settings > Database
+3. Copy the connection string and update your `.env` file
+4. Run migrations: `npm run db:push`
 
-## 🌐 Deployment
+### Using Neon
 
-This application can be deployed on various platforms:
+1. Create a project at [neon.tech](https://neon.tech)
+2. Copy the connection string to your `.env` file
+3. Run migrations: `npm run db:push`
 
-- **Vercel** (Recommended): Full-stack deployment with serverless functions
-- **Railway**: Container-based deployment with managed PostgreSQL
-- **Heroku**: Traditional PaaS with Heroku Postgres
-- **DigitalOcean**: App Platform with managed database
+## 🚀 Deployment
 
-See [SETUP.md](./SETUP.md) for platform-specific deployment guides.
+### Deploy to Vercel
 
-## 🎯 Course Offerings
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
 
-### Self-Study Courses (₹149 each)
-- **Complete Software Testing Mastery** (90 days)
-- **Fast-Track Testing Bootcamp** (60 days)
-- **Automation Testing Specialist** (30 days)
-- **Manual Testing Expert** (45 days)
-- **SQL Testing Pro** (25 days)
-- **JMeter Performance Testing** (20 days)
+### Deploy to Railway
 
-### Premium Live Training (₹25,000)
-- **Live Video Call Sessions** with direct instructor teaching
-- **Personal Mentorship** and real-time doubt clearing
-- **Manual + Automation** comprehensive training
-- **Job Placement Guarantee** and enhanced career support
+1. Connect your GitHub repository to Railway
+2. Set environment variables in Railway dashboard
+3. Deploy automatically
 
-## 🔐 Authentication
+### Deploy to Render
 
-The platform uses Replit OAuth for secure authentication with session-based user management. Students and admins have different access levels.
+1. Connect your GitHub repository to Render
+2. Set environment variables
+3. Deploy as a web service
 
-## 💰 Payment Process
+## 📁 Project Structure
 
-1. Students browse courses and submit enquiries
-2. Admin receives email notifications for new enquiries
-3. Students make payments via UPI/bank transfer
-4. Admin manually activates students after payment verification
-5. Students gain access to their selected courses
+```
+testcademy/
+├── client/                 # Frontend React application
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── pages/          # Page components
+│   │   ├── hooks/          # Custom React hooks
+│   │   ├── lib/            # Utility functions
+│   │   └── types/          # TypeScript type definitions
+├── server/                 # Backend Express application
+│   ├── index.ts           # Main server file
+│   ├── routes.ts          # API routes
+│   ├── db.ts              # Database configuration
+│   └── storage.ts          # Database operations
+├── shared/                 # Shared code between frontend and backend
+│   ├── schema.ts          # Database schema
+│   └── relations.ts       # Database relations
+├── migrations/             # Database migrations
+└── uploads/               # File uploads directory
+```
 
-## 🛡️ Security Features
+## 🔧 Available Scripts
 
-- Session-based authentication with secure cookies
-- PostgreSQL-backed session storage
-- Environment variable protection
-- CSRF protection and secure headers
-- Input validation with Zod schemas
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run check` - Type check
+- `npm run db:push` - Push database schema changes
 
-## 📝 License
+## 🎯 Key Features
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+### Student Features
+- Course enrollment and management
+- Progress tracking and analytics
+- Interactive learning materials
+- Quiz and assessment system
+- Certificate generation
+- Live session participation
+
+### Admin Features
+- Course creation and management
+- User management
+- Content management
+- Analytics and reporting
+- System configuration
+
+### Instructor Features
+- Live session management
+- Student progress monitoring
+- Content creation tools
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📞 Support
+## 📄 License
 
-For support and questions:
-- Create an issue on GitHub
-- Check the [SETUP.md](./SETUP.md) troubleshooting section
-- Review the documentation in the `/docs` folder
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
+## 🆘 Support
 
-Built with ❤️ for the software testing community
+If you have any questions or need help, please:
+- Open an issue on GitHub
+- Contact us at support@testcademy.com
+
+## 🙏 Acknowledgments
+
+- React team for the amazing framework
+- Vite team for the fast build tool
+- Tailwind CSS for the utility-first CSS framework
+- Radix UI for accessible components
+- Supabase for the backend-as-a-service platform
