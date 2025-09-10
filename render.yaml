@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: bugnation-api
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bugnation-db
+          property: connectionString
+      - key: SUPABASE_URL
+        value: https://yyuncxmoocpojlgkhfqf.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5dW5jeG1vb2Nwb2psZ2toZnFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MDMxOTcsImV4cCI6MjA3MzA3OTE5N30._PvwUP4EfAnFo0JYXBewuCwudyGDnlnBxt5WKnTGXfY
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5dW5jeG1vb2Nwb2psZ2toZnFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MDMxOTcsImV4cCI6MjA3MzA3OTE5N30._PvwUP4EfAnFo0JYXBewuCwudyGDnlnBxt5WKnTGXfY
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://bugnation.onrender.com

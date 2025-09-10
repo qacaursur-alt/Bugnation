@@ -27,10 +27,9 @@ jobs:
       run: npm run build
       env:
         NODE_ENV: production
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-        SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
